@@ -5,6 +5,9 @@ class User < ApplicationRecord
   validates :discord_id, presence: true, uniqueness: true
   validates :discord_discriminator, presence: true
 
+  has_many :players
+  has_many :tournaments, through: :players
+
   def self.find_or_create_from_auth_hash(auth)
     user_params = auth[:extra][:raw_info]
 
