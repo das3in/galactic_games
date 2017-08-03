@@ -1,3 +1,5 @@
 class HomeController < ApplicationController
-  def index; end
+  def index
+    @tournaments = Tournament.all.order("scheduled_at DESC").limit(5)
+  end
 end
