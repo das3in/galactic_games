@@ -9,11 +9,11 @@
       <% end %>
     </div>
     <div class="col-md-4">
-      <% if current_user.tournaments.exists?(@tournament) %>
+      <% if @player %>
         <h2>REGISTERED</h2>
-        <button class="btn btn-danger">Drop</button>
+        <%= link_to "Drop", [@tournament, @player], method: :delete, class: "btn btn-danger" %>
       <% else %>
-         <button class="btn btn-success">Register now</button>
+        <%= link_to "Register now", tournament_players_path(@tournament), method: :post, class: "btn btn-success" %>
       <% end %>
     </div>
   </div>
