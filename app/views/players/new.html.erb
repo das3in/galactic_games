@@ -1,4 +1,53 @@
-<h1>Register</h1>
+<div class="jumbotron">
+  <div class="row">
+    <div class="col-md-8">
+      <h2><%= @tournament.name %></h2>
+      <% if @tournament.scheduled_at < Date.current + 1.day %>
+        <p>Starts in <%= distance_of_time_in_words(Time.now, @tournament.scheduled_at) %></p>
+      <% else %>
+        <p><%= l @tournament.scheduled_at %></p>
+      <% end %>
+    </div>
+    <div class="col-md-4">
+      <% if current_user.tournaments.exists?(@tournament) %>
+        <h2>REGISTERED</h2>
+        <button class="btn btn-danger">Drop</button>
+      <% else %>
+         <button class="btn btn-success">Register now</button>
+      <% end %>
+    </div>
+  </div>
+</div>
 
-
-<h3><%= @tournament.name %></h3>
+<div class="row">
+  <h3>Slots available - <%= @available_slots %>/<%= @tournament.player_slots %></h3>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Player</th>
+        <th>Rating</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @tournament.players.each do |player| %>
+        <% if player.user == current_user %>
+          <tr style="color: red;">
+            <td><%= player.user.username %></td>
+            <td><%= player.user.rating %></td>
+          </tr>
+        <% else %>
+          <tr>
+            <td><%= player.user.username %></td>
+            <td><%= player.user.rating %></td>
+          </tr>
+        <% end %>
+      <% end %>
+      <% @available_slots.times do %>
+        <tr>
+          <td>Empty</td>
+          <td></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
