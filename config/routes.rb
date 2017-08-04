@@ -8,4 +8,8 @@ Rails.application.routes.draw do
   get "auth/failure", to: redirect("/")
 
   get "dashboard", to: "player_dashboard#show", as: "dashboard"
+
+  resources :tournaments do
+    get "register", to: "players#new", as: "register"
+  end
 end

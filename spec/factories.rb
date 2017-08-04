@@ -6,11 +6,11 @@ FactoryGirl.define do
     seat_1_score 1
     seat_2_score 1
     winner nil
-    tournament nil
+    tournament tournament
   end
   factory :player do
-    user nil
-    tournament nil
+    user user
+    tournament tournament
     wins 1
     losses 1
     points 1
