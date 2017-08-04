@@ -14,4 +14,12 @@ class Tournament < ApplicationRecord
       in_progress: "in progress",
       completed: "completed",
     }
+
+    def registering?
+      status == "registering"
+    end
+
+    def slots_full
+      players.count >= player_slots
+    end
 end

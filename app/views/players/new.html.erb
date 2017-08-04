@@ -3,9 +3,9 @@
     <div class="col-md-8">
       <h2><%= @tournament.name %></h2>
       <% if @tournament.scheduled_at < Date.current + 1.day %>
-        <p>Starts in <%= distance_of_time_in_words(Time.now, @tournament.scheduled_at) %></p>
+        <p>Starts in <%= distance_of_time_in_words(Time.now, @tournament.scheduled_at) %> - <small>Registration starts 2 hours prior</small></p>
       <% else %>
-        <p><%= l @tournament.scheduled_at %></p>
+        <p><%= l @tournament.scheduled_at %> - <small>Registration starts 2 hours prior</small></p>
       <% end %>
     </div>
     <div class="col-md-4">
@@ -13,7 +13,13 @@
         <h2>REGISTERED</h2>
         <%= link_to "Drop", [@tournament, @player], method: :delete, class: "btn btn-danger" %>
       <% else %>
-        <%= link_to "Register now", tournament_players_path(@tournament), method: :post, class: "btn btn-success" %>
+        <% if @tournament.registering? %>
+          <% if @tournament.slots_full %>
+            <h2>Tournament full</h2>
+          <% else %>
+            <%= link_to "Register now", tournament_players_path(@tournament), method: :post, class: "btn btn-success" %>
+          <% end %>
+        <% end %>
       <% end %>
     </div>
   </div>

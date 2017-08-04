@@ -7,7 +7,9 @@ class PlayersController < ApplicationController
   end
 
   def create
-    @tournament.players.create(user: current_user)
+    if !@tournament.slots_full && @tournament.registering?
+      @tournament.players.create(user: current_user)
+    end
 
     redirect_to tournament_register_path(@tournament)
   end
