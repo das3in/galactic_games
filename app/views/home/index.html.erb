@@ -13,12 +13,10 @@
         <div class="list-group">
           <% @tournaments.each do |tournament| %>
             <div class="row list-group-item">
-              <a href="#" style="text-decoration: none; color: inherit;">
                 <div class="col-md-8">
-                  <strong><%= tournament.name %></strong>
+                  <strong><%= link_to tournament.name, tournament_path(tournament) %></strong>
                   <p><small><%= l tournament.scheduled_at %></small></p>
                 </div>
-              </a>
               <div class="col-md-4">
                 <%= link_to "Register", tournament_register_path(tournament), class: "btn btn-primary" %>
               </div>

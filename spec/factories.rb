@@ -19,6 +19,8 @@ FactoryGirl.define do
   factory :tournament do
     name "MyString"
     scheduled_at "2017-08-02 21:48:33"
+    player_slots 8
+    status "registering"
   end
   factory :user do
     email "MyString"
