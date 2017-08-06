@@ -1,1 +1,91 @@
-<h1><%= @tournament.name %></h1>
+<div class="jumbotron">
+  <div class="row">
+    <div class="col-md-8">
+      <h2><%= @tournament.name %></h2>
+      <% if @tournament.scheduled_at < Date.current + 1.day %>
+        <p>Starts in <%= distance_of_time_in_words(Time.now, @tournament.scheduled_at) %> - <small>Registration starts 2 hours prior</small></p>
+      <% else %>
+        <p><%= l @tournament.scheduled_at %> - <small>Registration starts 2 hours prior</small></p>
+      <% end %>
+    </div>
+    <div class="col-md-4">
+      <% if @player %>
+        <h2>REGISTERED</h2>
+        <%= link_to "Drop", [@tournament, @player], method: :delete, class: "btn btn-danger" %>
+      <% else %>
+        <%= link_to "Register", tournament_register_path(@tournament), class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<% if @tournament.registering? %>
+  <div class="row">
+    <h3>Slots available - <%= @available_slots %>/<%= @tournament.player_slots %></h3>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Player</th>
+          <th>Rating</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @tournament.players.each do |player| %>
+          <% if player.user == current_user %>
+            <tr style="color: red;">
+              <td><%= player.user.username %></td>
+              <td><%= player.user.rating %></td>
+            </tr>
+          <% else %>
+            <tr>
+              <td><%= player.user.username %></td>
+              <td><%= player.user.rating %></td>
+            </tr>
+          <% end %>
+        <% end %>
+        <% @available_slots.times do %>
+          <tr>
+            <td>Empty</td>
+            <td></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% elsif @tournament.active? %>
+  <div class="row">
+    <div class="col-md-12">
+      <h3>Pairings / Results</h3>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Table Number</th>
+            <th>Player 1</th>
+            <th>Player 2</th>
+            <th>Score</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <h3>Leaderboard</h3>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Username</th>
+            <th>Total points</th>
+            <th>Strength of Schedule</th>
+            <th>Extended Strength of Schedule</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+  </div>
+<% end %>
