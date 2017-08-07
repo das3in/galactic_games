@@ -18,6 +18,9 @@
   <%= render "layouts/navigation" %>
   <%= render "flashes" -%>
   <div class="container">
+    <% if current_match %>
+      <%= render "layouts/match_form" %>
+    <% end %>
     <%= yield %>
   </div>
   <%= render "javascript" %>

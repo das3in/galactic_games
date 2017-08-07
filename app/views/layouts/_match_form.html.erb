@@ -1,0 +1,31 @@
+<div class="row" style="border: 1px solid #ccc; margin: 5px;">
+  <div class="col-md-12">
+    <h4>YOU'RE IN A MATCH</h4>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Round</th>
+          <th>Player 1</th>
+          <th>Player 2</th>
+          <th>Report Score</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr>
+            <td><%= current_match.round_number %></td>
+            <td>
+              <strong><%= current_match.seat_1.user.username %></strong>
+            </td>
+            <td>
+              <strong><%= current_match.seat_2.user.username %></strong>
+            </td>
+            <td>
+              <%= simple_form_for current_match, url: edit_tournament_round_path(current_match) do |f| %>
+                <%= f.number_field :seat_1_score, class: "score" %> | <%= f.number_field :seat_2_score, class: "score" %> <%= f.submit "Submit", class: "btn btn-primary" %>
+              <% end %>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

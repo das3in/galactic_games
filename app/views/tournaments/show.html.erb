@@ -71,13 +71,25 @@
       <table class="table table-striped">
         <thead>
           <tr>
-            <th>Table Number</th>
+            <th>Round Number</th>
             <th>Player 1</th>
             <th>Player 2</th>
-            <th>Score</th>
+            <th>Winner</th>
           </tr>
         </thead>
         <tbody>
+          <% @current_round.each do |round| %>
+            <tr>
+              <td><%= round.round_number %></td>
+              <td><%= round.seat_1.user.username || "Dropped" %></td>
+              <td><%= round.seat_2.user.username || "Dropped" %></td>
+              <% if round.winner %>
+                <td><%= round.winner %></td>
+              <% else %>
+                <td>In progress</td>
+              <% end %>
+            </tr>
+          <% end %>
         </tbody>
       </table>
     </div>

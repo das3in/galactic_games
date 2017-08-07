@@ -12,5 +12,6 @@ Rails.application.routes.draw do
   resources :tournaments do
     get "register", to: "players#new", as: "register"
     resources :players
+    resources :rounds
   end
 end

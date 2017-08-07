@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170804041234) do
+ActiveRecord::Schema.define(version: 20170807062613) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,8 +51,9 @@ ActiveRecord::Schema.define(version: 20170804041234) do
     t.integer  "seat_2_score",  default: 0
     t.integer  "winner"
     t.integer  "tournament_id"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.string   "status",        default: "in_progress"
     t.index ["tournament_id"], name: "index_rounds_on_tournament_id", using: :btree
   end
 
@@ -77,6 +78,7 @@ ActiveRecord::Schema.define(version: 20170804041234) do
     t.datetime "created_at",                                null: false
     t.datetime "updated_at",                                null: false
     t.string   "rating",                default: "1000"
+    t.integer  "active_player_id"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
   end
 

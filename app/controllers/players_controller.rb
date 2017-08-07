@@ -8,7 +8,9 @@ class PlayersController < ApplicationController
 
   def create
     if !@tournament.slots_full && @tournament.registering?
-      @tournament.players.create(user: current_user)
+      player = @tournament.players.create(user: current_user)
+      current_user.active_player_id = player.id
+      current_user.save!
     end
 
     redirect_to tournament_register_path(@tournament)
@@ -18,6 +20,8 @@ class PlayersController < ApplicationController
     player = Player.find(params[:id])
 
     if player.user == current_user
+      current_user.active_player_id = nil
+      current_user.save!
       player.destroy
     end
 
