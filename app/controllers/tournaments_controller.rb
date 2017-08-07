@@ -3,7 +3,7 @@ class TournamentsController < ApplicationController
 
   def show
     @available_slots = @tournament.player_slots - @tournament.players.count
-    puts @tournament.status
+    @player = @tournament.players.find_by(user: current_user)
   end
 
   private
