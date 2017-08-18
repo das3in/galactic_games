@@ -21,6 +21,7 @@ gem "suspenders"
 gem "title"
 gem "uglifier"
 gem "omniauth-discord"
+gem "discordrb"
 
 group :development do
   gem "listen"
