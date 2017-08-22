@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170807062613) do
+ActiveRecord::Schema.define(version: 20170818014036) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(version: 20170807062613) do
     t.string   "tournament_type", default: "trial"
     t.string   "status",          default: "scheduled"
     t.integer  "player_slots",    default: 8
+    t.integer  "round_number",    default: 1
   end
 
   create_table "users", force: :cascade do |t|

@@ -4,6 +4,7 @@ class PlayersController < ApplicationController
   def new
     @available_slots = @tournament.player_slots - @tournament.players.count
     @player = @tournament.players.find_by(user: current_user)
+    @players = @tournament.players.includes(:user)
   end
 
   def create
